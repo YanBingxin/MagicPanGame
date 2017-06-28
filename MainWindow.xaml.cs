@@ -104,7 +104,11 @@ namespace MagicPan
             count++;
             time.Content = TimeSpan.FromSeconds(count);
         }
-
+        /// <summary>
+        /// 点击棋子
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gd_Click(object sender, RoutedEventArgs e)
         {
             PanKey pan = e.Source as PanKey;
@@ -112,6 +116,7 @@ namespace MagicPan
             {
                 return;
             }
+            //交换空块
             if (Math.Abs(pan.X - panNull.X) + Math.Abs(pan.Y - panNull.Y) == 1)
             {
                 int x = pan.X;
@@ -123,6 +128,7 @@ namespace MagicPan
                 changed = true;
             }
 
+            //检查是否全部完成
             foreach (PanKey p in pans)
             {
                 if (!p.CheckLocation())
@@ -134,12 +140,16 @@ namespace MagicPan
             timer.Stop();
             MessageBox.Show("真棒！你赢了！");
         }
-
+        /// <summary>
+        /// 重新开始
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CreatePan();
         }
-
+        #region 隐蔽性
         private void Window_MouseEnter(object sender, MouseEventArgs e)
         {
             this.Opacity = 1;
@@ -149,6 +159,6 @@ namespace MagicPan
         {
             this.Opacity = 0.1;
         }
-
+        #endregion
     }
 }
