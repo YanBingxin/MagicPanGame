@@ -9,7 +9,13 @@ namespace MagicPan
 {
     public class PanKey : Button
     {
-
+        public int Index
+        {
+            get
+            {
+                return X + Y * 4;
+            }
+        }
         public int X
         {
             get { return (int)GetValue(XProperty); }

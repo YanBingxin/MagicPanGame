@@ -33,6 +33,10 @@ namespace MagicPan
         /// 计时器
         /// </summary>
         DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
+        /// <summary>
+        /// 随机生成器
+        /// </summary>
+        Random random = new Random();
 
         public MainWindow()
         {
@@ -73,8 +77,8 @@ namespace MagicPan
         {
             count = 0;
             pans.Clear();
-            panNull = new PanKey() { Template = null, Value = 16, Content = 16, IsEnabled = false, X = 3, Y = 3 };
-            pans.Add(panNull);
+
+            #region 生成对象
             //生成对象
             for (int i = 0; i < 4; i++)
             {
@@ -87,23 +91,43 @@ namespace MagicPan
                     pans.Add(pk);
                 }
             }
-            //三轮算法打乱
-            for (int s = 0; s < 14000; s++)
+            panNull = new PanKey() { Template = null, Value = 16, Content = 16, IsEnabled = false, X = 3, Y = 3 };
+            pans.Add(panNull);
+            #endregion
+
+            #region 打乱棋盘
+            //打乱
+            for (int s = 0; s < 10000; s++)
             {
-                int i = new Random().Next(0, 14);
-                PanKey tem = new PanKey();
-                tem.X = pans[i].X;
-                tem.Y = pans[i].Y;
-                pans[i].X = pans[i + 1].X;
-                pans[i].Y = pans[i + 1].Y;
-                pans[i + 1].X = pans[i + 2].X;
-                pans[i + 1].Y = pans[i + 2].Y;
-                pans[i + 2].X = tem.X;
-                pans[i + 2].Y = tem.Y;
+                int i = random.Next(0, 4);
+                PanKey p = new PanKey();
+                switch (i)
+                {
+                    case 1://上
+                        p = pans.FirstOrDefault(o => (o.X == panNull.X && o.Y == panNull.Y - 1));
+                        break;
+                    case 0://下
+                        p = pans.FirstOrDefault(o => (o.X == panNull.X && o.Y == panNull.Y + 1));
+                        break;
+                    case 2://左
+                        p = pans.FirstOrDefault(o => (o.X == panNull.X - 1 && o.Y == panNull.Y));
+                        break;
+                    case 3://右
+                        p = pans.FirstOrDefault(o => (o.X == panNull.X + 1 && o.Y == panNull.Y));
+                        break;
+                    default:
+                        break;
+                }
+                if (p != null)
+                    TryMoveToNull(p);
+
             }
+            #endregion
+
             changed = true;
             timer.Start();
         }
+
         int count = 0;
         void timer_Tick(object sender, EventArgs e)
         {
@@ -118,11 +142,17 @@ namespace MagicPan
         private void gd_Click(object sender, RoutedEventArgs e)
         {
             PanKey pan = e.Source as PanKey;
-            if (pan.Value == 16)
-            {
-                return;
-            }
             //交换空块
+            TryMoveToNull(pan);
+            //验证是否完成魔板
+            VertifyFinished();
+        }
+        /// <summary>
+        /// 尝试向空格移动
+        /// </summary>
+        /// <param name="pan"></param>
+        private void TryMoveToNull(PanKey pan)
+        {
             if (Math.Abs(pan.X - panNull.X) + Math.Abs(pan.Y - panNull.Y) == 1)
             {
                 int x = pan.X;
@@ -133,8 +163,6 @@ namespace MagicPan
                 panNull.Y = y;
                 changed = true;
             }
-
-            VertifyFinished();
         }
         /// <summary>
         /// 检查是否全部完成

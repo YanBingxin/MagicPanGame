@@ -13,3 +13,5 @@ E:\个人文档\框架demo\MagicPan\obj\Debug\MagicPan.Properties.Resources.reso
 E:\个人文档\框架demo\MagicPan\obj\Debug\MagicPan.csproj.GenerateResource.Cache
 E:\个人文档\框架demo\MagicPan\obj\Debug\MagicPan.exe
 E:\个人文档\框架demo\MagicPan\obj\Debug\MagicPan.pdb
+E:\个人文档\框架demo\MagicPan\obj\Debug\ShowTip.baml
+E:\个人文档\框架demo\MagicPan\obj\Debug\ShowTip.g.cs

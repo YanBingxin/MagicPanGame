@@ -1,6 +1,8 @@
 E:\个人文档\框架demo\MagicPan\bin\Release\MagicPan.exe
 E:\个人文档\框架demo\MagicPan\bin\Release\MagicPan.pdb
+E:\个人文档\框架demo\MagicPan\obj\Release\ShowTip.baml
 E:\个人文档\框架demo\MagicPan\obj\Release\MainWindow.g.cs
+E:\个人文档\框架demo\MagicPan\obj\Release\ShowTip.g.cs
 E:\个人文档\框架demo\MagicPan\obj\Release\App.g.cs
 E:\个人文档\框架demo\MagicPan\obj\Release\GeneratedInternalTypeHelper.g.cs
 E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan_MarkupCompile.cache
@@ -12,6 +14,3 @@ E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.Properties.Resources.re
 E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.csproj.GenerateResource.Cache
 E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.exe
 E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.pdb
-E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.csprojResolveAssemblyReference.cache
-E:\个人文档\框架demo\MagicPan\obj\Release\ShowTip.baml
-E:\个人文档\框架demo\MagicPan\obj\Release\ShowTip.g.cs
