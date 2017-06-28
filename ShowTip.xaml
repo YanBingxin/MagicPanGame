@@ -1,0 +1,10 @@
+﻿<Window x:Class="MagicPan.ShowTip"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ShowTip" Height="50" Width="250" WindowStartupLocation="CenterOwner" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Grid Background="Transparent">
+        <Border CornerRadius="5" Background="DimGray" MouseDown="Border_MouseDown">
+            <Label x:Name="lbTip" HorizontalContentAlignment="Center" VerticalAlignment="Center" Foreground="LightGray"/>
+        </Border>
+    </Grid>
+</Window>

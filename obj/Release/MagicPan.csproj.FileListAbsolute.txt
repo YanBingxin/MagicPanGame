@@ -13,3 +13,5 @@ E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.csproj.GenerateResource
 E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.exe
 E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.pdb
 E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.csprojResolveAssemblyReference.cache
+E:\个人文档\框架demo\MagicPan\obj\Release\ShowTip.baml
+E:\个人文档\框架demo\MagicPan\obj\Release\ShowTip.g.cs

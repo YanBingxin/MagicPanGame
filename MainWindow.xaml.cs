@@ -38,7 +38,14 @@ namespace MagicPan
         {
             InitializeComponent();
             timer.Tick += timer_Tick;
+            this.Loaded += MainWindow_Loaded;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
+        }
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Top = 0;
+            this.Left = SystemParameters.FullPrimaryScreenWidth - this.ActualWidth;
         }
         /// <summary>
         /// 绘图UI界面
@@ -81,7 +88,7 @@ namespace MagicPan
                 }
             }
             //三轮算法打乱
-            for (int s = 0; s < 1400; s++)
+            for (int s = 0; s < 14000; s++)
             {
                 int i = new Random().Next(0, 14);
                 PanKey tem = new PanKey();
@@ -93,7 +100,6 @@ namespace MagicPan
                 pans[i + 1].Y = pans[i + 2].Y;
                 pans[i + 2].X = tem.X;
                 pans[i + 2].Y = tem.Y;
-                Console.WriteLine(i);
             }
             changed = true;
             timer.Start();
@@ -128,7 +134,14 @@ namespace MagicPan
                 changed = true;
             }
 
-            //检查是否全部完成
+            VertifyFinished();
+        }
+        /// <summary>
+        /// 检查是否全部完成
+        /// </summary>
+        /// <param name="pan"></param>
+        private void VertifyFinished()
+        {
             foreach (PanKey p in pans)
             {
                 if (!p.CheckLocation())
@@ -136,9 +149,13 @@ namespace MagicPan
                     return;
                 }
             }
-            panNull.Template = pan.Template;
+
             timer.Stop();
-            MessageBox.Show("真棒！你赢了！");
+            panNull.Template = pans[1].Template;
+            ShowTip tip = new ShowTip();
+            tip.Owner = this;
+            tip.lbTip.Content = "恭喜你完成了！真棒，成绩：" + time.Content;
+            tip.ShowDialog();
         }
         /// <summary>
         /// 重新开始
