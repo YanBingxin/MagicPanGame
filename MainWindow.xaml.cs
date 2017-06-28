@@ -29,15 +29,22 @@ namespace MagicPan
         /// 全键盘
         /// </summary>
         private List<PanKey> pans = new List<PanKey>();
+        /// <summary>
+        /// 计时器
+        /// </summary>
         DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 1) };
 
         public MainWindow()
         {
             InitializeComponent();
-            this.Loaded += MainWindow_Loaded;
+            timer.Tick += timer_Tick;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
-
+        /// <summary>
+        /// 绘图UI界面
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
             if (!changed)
@@ -52,13 +59,9 @@ namespace MagicPan
             }
             changed = false;
         }
-
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            CreatePan();
-            timer.Tick += timer_Tick;
-        }
-
+        /// <summary>
+        /// 创建新盘
+        /// </summary>
         public void CreatePan()
         {
             count = 0;
@@ -77,7 +80,7 @@ namespace MagicPan
                     pans.Add(pk);
                 }
             }
-            //sanlunhuan
+            //三轮算法打乱
             for (int s = 0; s < 1400; s++)
             {
                 int i = new Random().Next(0, 14);
@@ -128,13 +131,23 @@ namespace MagicPan
                 }
             }
             panNull.Template = pan.Template;
-            MessageBox.Show("你赢了！");
             timer.Stop();
+            MessageBox.Show("真棒！你赢了！");
         }
 
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CreatePan();
+        }
+
+        private void Window_MouseEnter(object sender, MouseEventArgs e)
+        {
+            this.Opacity = 1;
+        }
+
+        private void Window_MouseLeave(object sender, MouseEventArgs e)
+        {
+            this.Opacity = 0.1;
         }
 
     }
