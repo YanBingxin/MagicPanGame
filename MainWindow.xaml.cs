@@ -45,7 +45,11 @@ namespace MagicPan
             this.Loaded += MainWindow_Loaded;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
-
+        /// <summary>
+        /// 窗口位置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             this.Top = 0;
@@ -103,11 +107,11 @@ namespace MagicPan
                 PanKey p = new PanKey();
                 switch (i)
                 {
-                    case 1://上
-                        p = pans.FirstOrDefault(o => (o.X == panNull.X && o.Y == panNull.Y - 1));
-                        break;
                     case 0://下
                         p = pans.FirstOrDefault(o => (o.X == panNull.X && o.Y == panNull.Y + 1));
+                        break;
+                    case 1://上
+                        p = pans.FirstOrDefault(o => (o.X == panNull.X && o.Y == panNull.Y - 1));
                         break;
                     case 2://左
                         p = pans.FirstOrDefault(o => (o.X == panNull.X - 1 && o.Y == panNull.Y));
@@ -143,17 +147,17 @@ namespace MagicPan
         {
             PanKey pan = e.Source as PanKey;
             //交换空块
-            TryMoveToNull(pan);
-            //验证是否完成魔板
-            VertifyFinished();
+            if (TryMoveToNull(pan))
+                //验证是否完成魔板
+                VertifyFinished();
         }
         /// <summary>
         /// 尝试向空格移动
         /// </summary>
         /// <param name="pan"></param>
-        private void TryMoveToNull(PanKey pan)
+        private bool TryMoveToNull(PanKey pan)
         {
-            if (Math.Abs(pan.X - panNull.X) + Math.Abs(pan.Y - panNull.Y) == 1)
+            if (Math.Abs(pan.X - panNull.X) + Math.Abs(pan.Y - panNull.Y) == 1 && panNull.Template == null)
             {
                 int x = pan.X;
                 int y = pan.Y;
@@ -162,7 +166,9 @@ namespace MagicPan
                 panNull.X = x;
                 panNull.Y = y;
                 changed = true;
+                return true;
             }
+            return false;
         }
         /// <summary>
         /// 检查是否全部完成

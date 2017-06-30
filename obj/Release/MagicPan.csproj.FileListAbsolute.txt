@@ -14,3 +14,4 @@ E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.Properties.Resources.re
 E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.csproj.GenerateResource.Cache
 E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.exe
 E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.pdb
+E:\个人文档\框架demo\MagicPan\obj\Release\MagicPan.csprojResolveAssemblyReference.cache
