@@ -50,6 +50,8 @@ namespace MagicPan
             };
             this.lbSetUp.MouseDown += delegate
             {
+                if (Ban.Columns == 16 || Ban.Rows == 16)
+                    return;
                 Ban.Columns++;
                 Ban.Rows++;
                 InitializeMagicPan(null, null);
