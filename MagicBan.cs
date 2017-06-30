@@ -9,13 +9,20 @@ namespace MagicPan
 {
     public class MagicBan : DependencyObject
     {
+        public int Rows = 4;
+        public int Columns = 4;
+        /// <summary>
+        /// 消耗时间
+        /// </summary>
         public object Time { set; get; }
-
+        /// <summary>
+        /// 是否刷新UI界面
+        /// </summary>
         public bool changed = false;
         /// <summary>
         /// 空盘
         /// </summary>
-        private PanKey panNull = new PanKey() { Template = null, Value = 16, Content = 16, IsEnabled = false, X = 3, Y = 3 };
+        private PanKey panNull = new PanKey();
         /// <summary>
         /// 全键盘
         /// </summary>
@@ -42,19 +49,19 @@ namespace MagicPan
 
             #region 生成对象
             //生成对象
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Columns; i++)
             {
-                for (int j = 0; j < 3 || (j < 4 && i < 3); j++)
+                for (int j = 0; j < Rows - 1 || (j < Rows && i < Columns - 1); j++)
                 {
                     PanKey pk = new PanKey();
                     pk.X = i;
                     pk.Y = j;
-                    pk.Value = i + 4 * j + 1;
+                    pk.Value = i + Columns * j + 1;
                     pk.Click += pk_Click;
                     pans.Add(pk);
                 }
             }
-            panNull = new PanKey() { Template = null, Value = 16, Content = 16, IsEnabled = false, X = 3, Y = 3 };
+            panNull = new PanKey() { Template = null, Value = this.Rows * this.Columns, IsEnabled = false, X = Columns - 1, Y = Rows - 1 };
             pans.Add(panNull);
             #endregion
 
@@ -179,7 +186,7 @@ namespace MagicPan
         {
             foreach (PanKey p in pans)
             {
-                if (!p.CheckLocation())
+                if (!p.CheckLocation(Columns))
                 {
                     return;
                 }

@@ -9,13 +9,6 @@ namespace MagicPan
 {
     public class PanKey : Button
     {
-        public int Index
-        {
-            get
-            {
-                return X + Y * 4;
-            }
-        }
         public int X
         {
             get { return (int)GetValue(XProperty); }
@@ -48,9 +41,9 @@ namespace MagicPan
         public static readonly DependencyProperty XProperty =
             DependencyProperty.Register("X", typeof(int), typeof(PanKey), new PropertyMetadata(100));
 
-        public bool CheckLocation()
+        public bool CheckLocation(int columns)
         {
-            return X + 4 * Y + 1 == Value;
+            return X + columns * Y + 1 == Value;
         }
     }
 }
