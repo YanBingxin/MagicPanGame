@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace MagicPan
@@ -11,6 +12,7 @@ namespace MagicPan
     {
         public int Rows = 4;
         public int Columns = 4;
+        int count = 0;
         /// <summary>
         /// 消耗时间
         /// </summary>
@@ -35,6 +37,10 @@ namespace MagicPan
         /// 随机生成器
         /// </summary>
         private Random random = new Random();
+        /// <summary>
+        /// 棋子图像画刷
+        /// </summary>
+        public List<Brush> PBrushes = new List<Brush>();
         public MagicBan()
         {
             timer.Tick += timer_Tick;
@@ -77,7 +83,29 @@ namespace MagicPan
             changed = true;
             timer.Start();
         }
+        void timer_Tick(object sender, EventArgs e)
+        {
+            count++;
+            Time = TimeSpan.FromSeconds(count);
+        }
+        /// <summary>
+        /// 点击棋子
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pk_Click(object sender, RoutedEventArgs e)
+        {
+            PanKey pan = sender as PanKey;
+            //交换空块
+            if (TrySwapToNull(pan))
+                //验证是否完成魔板
+                VertifyFinished();
+        }
 
+        /// <summary>
+        /// 向xxx方向移动空键
+        /// </summary>
+        /// <param name="i"></param>
         private void MovePanNull(int i)
         {
             PanKey p = new PanKey();
@@ -101,7 +129,10 @@ namespace MagicPan
             if (p != null)
                 TrySwapWithNull(p);
         }
-
+        /// <summary>
+        /// 单键与空键交换位置
+        /// </summary>
+        /// <param name="pan"></param>
         private void TrySwapWithNull(PanKey pan)
         {
             if (Math.Abs(pan.X - panNull.X) + Math.Abs(pan.Y - panNull.Y) == 1 && panNull.Template == null)
@@ -115,26 +146,7 @@ namespace MagicPan
                 changed = true;
             }
         }
-
-        int count = 0;
-        void timer_Tick(object sender, EventArgs e)
-        {
-            count++;
-            Time = TimeSpan.FromSeconds(count);
-        }
-        /// <summary>
-        /// 点击棋子
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pk_Click(object sender, RoutedEventArgs e)
-        {
-            PanKey pan = sender as PanKey;
-            //交换空块
-            if (TrySwapToNull(pan))
-                //验证是否完成魔板
-                VertifyFinished();
-        }
+        
         /// <summary>
         /// 尝试向空格移动
         /// </summary>

@@ -4,6 +4,7 @@
         xmlns:local="clr-namespace:MagicPan"
         Title="魔盘" Height="300" Width="300" Style="{DynamicResource WindowStyle}" ResizeMode="NoResize" ShowInTaskbar="False" Topmost="True">
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <Style TargetType="local:PanKey">
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="Template" Value="{DynamicResource Btn}"/>
@@ -33,16 +34,7 @@
         <Grid Cursor="Hand">
             <Label x:Name="lbTime" HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="LightGray" Margin="0,-35,120,0" FontSize="12" ToolTip="耗时" />
             <Label x:Name="lbGo" Content="Go" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-35,45,0" FontSize="12" ToolTip="开始新的一局"/>
-            <Label Content="?" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-40,70,0" FontSize="20">
-                <Label.ToolTip>
-                    <Border CornerRadius="5" Background="Gray" Width="180" Height="180" >
-                        <Grid>
-                            <Label Content="by 颜" Foreground="LightGray" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,-10" Panel.ZIndex="1000"/>
-                            <Grid x:Name="gdTip">
-                            </Grid>
-                        </Grid>
-                    </Border>
-                </Label.ToolTip>
+            <Label x:Name="lbTip" Content="?" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-40,70,0" FontSize="20">
             </Label>
             <Label x:Name="lbSetUp" Content="↑" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-37,30,0" FontSize="15" ToolTip="提高难度"/>
             <Label x:Name="lbSetDown" Content="↓" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-37,15,0" FontSize="15" ToolTip="降低难度"/>
@@ -62,6 +54,8 @@
                 </Grid.ColumnDefinitions>
 
             </Grid>
+
+            <Grid x:Name="gdTip" Visibility="{Binding IsMouseOver,ElementName=lbTip,Converter={StaticResource BoolToVisibilityConverter}}"/>
         </Grid>
     </Border>
 </Window>

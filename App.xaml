@@ -30,8 +30,8 @@
                                         <RowDefinition Height="40"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Label Content="{TemplateBinding Title}" FontSize="{TemplateBinding FontSize}"  Grid.Row="0" Foreground="{TemplateBinding Foreground}" local:WindowStyleHelper.CanDragMove="true"/>
-                                    <Label Background="Transparent" Content="×" FontSize="25" Grid.Row="0" HorizontalAlignment="Right" Width="auto" VerticalAlignment="Top" local:WindowStyleHelper.IsCloseActive="True" Margin="0,-5,0,0">
+                                    <Label Content="{TemplateBinding Title}" FontSize="{TemplateBinding FontSize}"  Grid.Row="0" Foreground="{TemplateBinding Foreground}" local:WindowStyleHelper.CanDragMove="true" Width="auto"/>
+                                    <Label Background="Transparent" Content="×" FontSize="25" Grid.Row="0" HorizontalAlignment="Right" Width="auto" VerticalAlignment="Top" local:WindowStyleHelper.IsCloseActive="True" Margin="0,-5,0,0" ToolTip="by 颜">
                                         <Label.Style>
                                             <Style TargetType="Label">
                                                 <Setter Property="Foreground" Value="{DynamicResource BtnForeground}"/>

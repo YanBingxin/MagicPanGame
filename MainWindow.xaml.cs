@@ -58,7 +58,6 @@ namespace MagicPan
             };
             Ban.timer.Tick += (s, arg) => { lbTime.Content = Ban.Time; };
             Ban.FinishedEvent += Ban_FinishedEvent;
-
         }
         /// <summary>
         /// 初始化Grid创建新拼图
