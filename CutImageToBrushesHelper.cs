@@ -25,6 +25,8 @@ namespace MagicPan
             int nWidth = fromImage.Width / cx;
             int nHeight = fromImage.Height / cy;
             Bitmap image = new Bitmap(nWidth, nHeight);
+            image.SetResolution(fromImage.HorizontalResolution, fromImage.VerticalResolution);
+
             Graphics graphics = Graphics.FromImage(image);
             for (int i = 0; i < cx; i++)
             {

@@ -139,13 +139,6 @@ namespace MagicPan
             try
             {
                 System.Drawing.Image image = System.Drawing.Image.FromFile(path);
-                if (image.HorizontalResolution != 96 || image.VerticalResolution != 96)
-                {
-                    ShowTip tip = new ShowTip();
-                    tip.Owner = this;
-                    tip.lbTip.Content = "所选图片不是标准96dpi,将无法得到最佳体验";
-                    tip.ShowDialog();
-                }
                 Ban.PBrushes = image.CutImageToBrushes(Ban.Rows, Ban.Columns);
                 for (int i = 0; i < Ban.pans.Count; i++)
                 {
