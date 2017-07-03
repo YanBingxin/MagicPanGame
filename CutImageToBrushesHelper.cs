@@ -24,17 +24,17 @@ namespace MagicPan
             List<System.Windows.Media.Brush> brushes = new List<System.Windows.Media.Brush>();
             int nWidth = fromImage.Width / cx;
             int nHeight = fromImage.Height / cy;
-            Bitmap image = new Bitmap(nWidth, nHeight);
-            image.SetResolution(fromImage.HorizontalResolution, fromImage.VerticalResolution);
-
-            Graphics graphics = Graphics.FromImage(image);
+            
             for (int i = 0; i < cx; i++)
             {
                 for (int j = 0; j < cy; j++)
                 {
+                    Bitmap image = new Bitmap(nWidth, nHeight);
+                    image.SetResolution(fromImage.HorizontalResolution, fromImage.VerticalResolution);
+                    Graphics graphics = Graphics.FromImage(image);
                     graphics.DrawImage(fromImage, 0, 0, new Rectangle(i * nWidth, j * nHeight, nWidth, nHeight), GraphicsUnit.Pixel);
                     System.Windows.Media.Imaging.BitmapSource bi = Imaging.CreateBitmapSourceFromHBitmap(image.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-                    System.Windows.Media.Brush brush = new ImageBrush(bi) { Stretch = Stretch.Fill, };
+                    System.Windows.Media.Brush brush = new ImageBrush(bi) { Stretch = Stretch.Fill };
                     brushes.Add(brush);
                 }
             }
