@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -146,7 +147,7 @@ namespace MagicPan
                 changed = true;
             }
         }
-        
+
         /// <summary>
         /// 尝试向空格移动
         /// </summary>
@@ -205,7 +206,12 @@ namespace MagicPan
             }
 
             timer.Stop();
-            panNull.Template = pans[1].Template;
+
+            //恢复空白格子模板
+            Binding binding = new Binding("Template");
+            binding.Source = pans[1];
+            panNull.SetBinding(PanKey.TemplateProperty, binding);
+
             FinishedEvent.Invoke(Time.ToString());
         }
 

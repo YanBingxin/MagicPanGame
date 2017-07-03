@@ -32,7 +32,7 @@ namespace MagicPan
                 {
                     graphics.DrawImage(fromImage, 0, 0, new Rectangle(i * nWidth, j * nHeight, nWidth, nHeight), GraphicsUnit.Pixel);
                     System.Windows.Media.Imaging.BitmapSource bi = Imaging.CreateBitmapSourceFromHBitmap(image.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-                    System.Windows.Media.Brush brush = new ImageBrush(bi);
+                    System.Windows.Media.Brush brush = new ImageBrush(bi) { };
                     brushes.Add(brush);
                 }
             }
